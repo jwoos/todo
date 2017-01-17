@@ -1,4 +1,5 @@
 import {applyMiddleware, createStore} from 'redux';
+import {combineReducers} from 'redux-immutable';
 import createLogger from 'redux-logger';
 import * as Immutable from 'immutable';
 
