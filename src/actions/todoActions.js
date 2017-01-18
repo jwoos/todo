@@ -1,13 +1,14 @@
-const taskAdd = (description) => {
+const todoAdd = (title, description) => {
 	return {
 		payload: {
+			title,
 			description
 		},
 		type: 'TODO_ADD'
 	};
 };
 
-const taskDelete = (id) => {
+const todoDelete = (id) => {
 	return {
 		payload: {
 			id
@@ -16,7 +17,7 @@ const taskDelete = (id) => {
 	};
 };
 
-const taskDone = (id) => {
+const todoDone = (id) => {
 	return {
 		payload: {
 			id
@@ -25,7 +26,7 @@ const taskDone = (id) => {
 	};
 };
 
-const taskNotDone = (id) => {
+const todoNotDone = (id) => {
 	return {
 		payload: {
 			id
@@ -34,9 +35,21 @@ const taskNotDone = (id) => {
 	};
 };
 
+const todoEdit = (id, title, description) => {
+	return {
+		payload: {
+			id,
+			title,
+			description
+		},
+		type: 'TODO_EDIT'
+	};
+};
+
 export default {
-	taskAdd,
-	taskDelete,
-	taskDone,
-	taskNotDone
-}
+	todoAdd,
+	todoDelete,
+	todoDone,
+	todoNotDone,
+	todoEdit
+};

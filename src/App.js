@@ -1,9 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import * as todoActions from './actions/todoActions';
+
 import './App.scss';
 
 class App extends React.Component {
+	componentDidMount() {
+		console.log(this);
+	}
+
 	render() {
 		return (
 			<div className="App">
@@ -18,8 +24,30 @@ class App extends React.Component {
 	}
 }
 
-const mapStateToProps = () => {};
+const mapStateToProps = (state) => {
+	return {
+		todos: state
+	};
+};
 
-const mapDispatchToProps = () => {};
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onTodoCreate: (...args) => {
+			dispatch(todoActions.todoAdd(...args));
+		},
+		onTodoDelete: (...args) => {
+			dispatch(todoActions.todoDelete(...args));
+		},
+		onTodoDone: (...args) => {
+			dispatch(todoActions.todoDone(...args));
+		},
+		onTodoNotDone: (...args) => {
+			dispatch(todoActions.todoDone(...args));
+		},
+		toTodoEdit: (...args) => {
+			dispatch(todoActions.todoEdit(...args));
+		}
+	};
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

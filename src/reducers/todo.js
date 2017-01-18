@@ -1,26 +1,66 @@
 import {createReducer} from 'redux-create-reducer';
+import Immutable from 'immutable';
+import uuid from 'uuid';
 
-const initialState = Immutable.List([]);
+const initialState = Immutable.Map({});
 
 const TODO_ADD = (state, action) => {
-	return state;
+	const id = uuid();
+
+	return state.set(id, Immutable.Map({
+		datetimeCreated: new Date(),
+		datetimeDone: null,
+		datetimeUpdated: new Date(),
+		description: action.payload.description,
+		done: false,
+		title: action.payload.title,
+	}));
 };
 
 const TODO_DELETE = (state, action) => {
-	return state;
+	return state.delete(action.payload.id);
 };
 
 const TODO_DONE = (state, action) => {
-	return state;
+	const currentDateTime = new Date();
+	const originalState = state.get(action.payload.id);
+	const modifiedState = originalState.merge(Immutable.Map({
+		done: true,
+		datetimeDone: currentDateTime,
+		datetimeUpdated: currentDateTime,
+	}));
+
+	return state.set(action.payload.id, modifiedState);
 };
 
 const TODO_NOT_DONE = (state, action) => {
-	return state;
+	const currentDateTime = new Date();
+	const originalState = state.get(action.payload.id);
+	const modifiedState = originalState.merge(Immutable.Map({
+		done: false,
+		datetimeDone: null,
+		datetimeUpdated: currentDateTime,
+	}));
+
+	return state.set(action.payload.id, modifiedState);
+};
+
+const TODO_EDIT = (state, action) => {
+	const currentDateTime = new Date();
+	const originalState = state.get(action.payload.id);
+	const modifiedState = originalState.merge(Immutable.Map({
+		title: action.payload.title,
+		description: action.payload.description,
+		datetimeUpdated: currentDateTime,
+	}));
+
+	return state.set(action.payload.id, modifiedState);
 };
 
 export default createReducer(initialState, {
 	TODO_ADD,
 	TODO_DELETE,
 	TODO_DONE,
-	TODO_NOT_DONE
+	TODO_NOT_DONE,
+	TODO_EDIT
 });
