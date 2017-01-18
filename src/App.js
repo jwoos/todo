@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import Todo from './components/Todo';
+import TodoInput from './components/TodoInput';
 import * as todoActions from './actions/todoActions';
-
-import './App.scss';
 
 class App extends React.Component {
 	componentDidMount() {
@@ -11,14 +11,14 @@ class App extends React.Component {
 	}
 
 	render() {
+		const todos = this.props.todos.entrySeq().map((kv) => {
+			return <Todo key={kv[0]} title={kv[1].get('title')} description={kv[1].get('description')}></Todo>
+		});
+
 		return (
-			<div className="App">
-				<div className="App-header">
-					<h2>Welcome to React</h2>
-				</div>
-				<p className="App-intro">
-					To get started, edit <code>src/App.js</code> and save to reload.
-				</p>
+			<div>
+				{todos}
+				<TodoInput></TodoInput>
 			</div>
 		);
 	}
@@ -26,7 +26,7 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
-		todos: state
+		todos: state.get('todo')
 	};
 };
 

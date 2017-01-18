@@ -2,15 +2,25 @@ import {createReducer} from 'redux-create-reducer';
 import Immutable from 'immutable';
 import uuid from 'uuid';
 
-const initialState = Immutable.Map({});
+const initialState = Immutable.fromJS({
+	'9b9da164-84da-4283-a833-258fa321d7f2': {
+		datetimeCreated: new Date(),
+		datetimeUpdated: new Date(),
+		datetimeDone: null,
+		description: 'This is an exmaple task',
+		title: 'My first task',
+		done: false,
+	}
+});
 
 const TODO_ADD = (state, action) => {
 	const id = uuid();
+	const currentDateTime = new Date();
 
 	return state.set(id, Immutable.Map({
-		datetimeCreated: new Date(),
+		datetimeCreated: currentDateTime,
 		datetimeDone: null,
-		datetimeUpdated: new Date(),
+		datetimeUpdated: currentDateTime,
 		description: action.payload.description,
 		done: false,
 		title: action.payload.title,
