@@ -1,24 +1,21 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import Todo from './components/Todo';
-import TodoInput from './components/TodoInput';
-import * as todoActions from './actions/todoActions';
+import TodoList from './components/TodoList';
+import TodoForm from './components/TodoForm';
+import todoActions from './actions/todoActions';
 
 class App extends React.Component {
-	componentDidMount() {
-		console.log(this);
-	}
-
 	render() {
-		const todos = this.props.todos.entrySeq().map((kv) => {
-			return <Todo key={kv[0]} title={kv[1].get('title')} description={kv[1].get('description')}></Todo>
-		});
-
 		return (
-			<div>
-				{todos}
-				<TodoInput></TodoInput>
+			<div id="app">
+				<TodoList
+					todos={this.props.todos}
+					onDelete={this.props.onTodoDelete}
+					onDone={this.props.onTodoDone}
+					onNotDone={this.props.onTodoNotDone}>
+				</TodoList>
+				<TodoForm submit={this.props.onTodoCreate}></TodoForm>
 			</div>
 		);
 	}
@@ -42,7 +39,7 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(todoActions.todoDone(...args));
 		},
 		onTodoNotDone: (...args) => {
-			dispatch(todoActions.todoDone(...args));
+			dispatch(todoActions.todoNotDone(...args));
 		},
 		toTodoEdit: (...args) => {
 			dispatch(todoActions.todoEdit(...args));

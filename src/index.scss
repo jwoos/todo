@@ -3,3 +3,121 @@ body {
 	padding: 0;
 	font-family: sans-serif;
 }
+
+h3, p, label {
+	padding: 0;
+	margin: 0;
+}
+
+html {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+button {
+	backface-visibility: hidden;
+	background-color: white;
+	border: solid #3498db 2px;
+	color: #3498db;
+	cursor: pointer;
+	display: inline-block;
+	height: 40px;
+	vertical-align: middle;
+	width: 125px;
+	text-transform: uppercase;
+	font-weight: 900;
+	transition: all .2s linear;
+	outline: 0;
+
+	&:hover {
+		color: white;
+		background-color: #3498db;
+	}
+
+	&:focus, &:active {
+		outline: 0;
+	}
+}
+
+#root {
+	width: 600px;
+	padding: 10px;
+}
+
+.card {
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	display: block;
+	margin: 10px 0;
+	padding: 10px;
+	position: relative;
+	transition: all 250ms;
+
+	&:hover {
+		box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
+		transform: translateY(-1px);
+	}
+
+	div {
+		display: inline-block;
+	}
+
+	.done-status {
+		background-color: #c0392b;
+		height: 100%;
+		position: absolute;
+		right: 0;
+		top: 0;
+		transition: all .2s linear;
+		width: 25px;
+	}
+
+	&.done > .done-status {
+		background-color: #27ae60;
+	}
+
+	.title {
+		display: block;
+	}
+
+	.description {
+		display: block;
+	}
+
+	.button-group {
+		margin-top: 10px;
+
+		& > button:not(:first-child) {
+			margin-left: 10px;
+		}
+	}
+}
+
+.form {
+	.label-input {
+		display: block;
+		margin-top: 10px;
+	}
+
+	label {
+		display: block;
+		font-size: 20px;
+	}
+
+	input {
+		display: block;
+		border: 0;
+		border-bottom: solid black 1px;
+		padding: 5px;
+		height: 25px;
+		width: 100%;
+
+		&:focus, &:active {
+			outline: 0;
+		}
+	}
+
+	button {
+		margin-top: 10px;
+	}
+}
