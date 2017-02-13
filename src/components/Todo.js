@@ -39,6 +39,24 @@ class Todo extends React.Component {
 					<h3 className="title">{this.props.title}</h3>
 					<p className="description">{this.props.description}</p>
 
+					<div className="timestamp-container">
+						<div className="timestamp-block">
+							<p className="timestamp-label">Created: </p>
+							<p>{this.props.datetimeCreated ?
+									this.props.datetimeCreated.toLocaleDateString('en-GB') : 'N/A'}</p>
+						</div>
+						<div className="timestamp-block">
+							<p className="timestamp-label">Updated: </p>
+							<p>{this.props.datetimeCreated ?
+									this.props.datetimeCreated.toLocaleDateString('en-GB') : 'N/A'}</p>
+						</div>
+						<div className="timestamp-block">
+							<p className="timestamp-label">Done: </p>
+							<p>{this.props.datetimeDone ?
+									this.props.datetimeDone.toLocaleDateString('en-GB') : 'N/A'}</p>
+						</div>
+					</div>
+
 					<div className="button-group">
 						<button onClick={this.handleDelete}>delete</button>
 						{toggle}
